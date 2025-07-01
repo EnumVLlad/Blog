@@ -1,0 +1,17 @@
+<div class="card" style="max-width:520px; margin:2em auto;">
+  <h1 style="text-align:center; color:var(--heading-text); margin-bottom:1.2em;">Створення нового блогу</h1>
+  <%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
+    <div style="margin-bottom:1.2em;">
+      <%= form.label :title, 'Заголовок блогу', style: 'color:var(--accent); font-weight:500;' %>
+      <%= form.text_field :title, required: true, maxlength: 120, placeholder: 'Введіть заголовок', style: 'margin-top:0.2em;' %>
+    </div>
+    <div style="margin-bottom:1.2em;">
+      <%= form.label :body, 'Текст блогу', style: 'color:var(--accent); font-weight:500;' %>
+      <%= form.text_area :body, required: true, rows: 8, placeholder: 'Ваш блог...', style: 'margin-top:0.2em;' %>
+    </div>
+    <div style="text-align:center;">
+      <%= form.submit 'Зберегти', class: 'btn', style: 'background:var(--accent); color:#fff; font-size:1.1em; border-radius:8px; padding:0.7em 2.2em; border:none;' %>
+      <%= link_to 'Скасувати', blogs_path, class: 'btn btn-outline', style: 'margin-left:1em; text-decoration:none;' %>
+    </div>
+  <% end %>
+</div>

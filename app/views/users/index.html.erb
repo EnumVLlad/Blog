@@ -1,0 +1,21 @@
+<div style="max-width:700px; margin: 0 auto;">
+  <h1 style="text-align:center; margin-bottom:1em;">Список користувачів</h1>
+  <table style="width:100%; border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f3f3f3;">
+        <th style="padding:8px; border:1px solid #ccc;">ID</th>
+        <th style="padding:8px; border:1px solid #ccc;">Email</th>
+        <th style="padding:8px; border:1px solid #ccc;">Дата реєстрації</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;"><%= user.id %></td>
+          <td style="padding:8px; border:1px solid #ccc;"><%= user.email %></td>
+          <td style="padding:8px; border:1px solid #ccc;"><%= user.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

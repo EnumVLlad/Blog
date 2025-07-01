@@ -1,0 +1,206 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+:root {
+  --main-bg: #f5f7fa;
+  --header-bg: #1976d2;
+  --header-text: #fff;
+  --footer-bg: #1976d2;
+  --footer-text: #fff;
+  --accent: #1976d2;
+  --accent-hover: #1565c0;
+  --success: #43a047;
+  --danger: #c00;
+  --main-text: #222;
+  --secondary-text: #555;
+  --border: #e3e6ea;
+  --shadow: 0 2px 8px rgba(30,60,90,0.06);
+  --primary-btn-bg: #1976d2;
+  --primary-btn-text: #fff;
+  --primary-btn-hover: #1565c0;
+  --secondary-btn-bg: #fff;
+  --secondary-btn-text: #1976d2;
+  --secondary-btn-border: #1976d2;
+  --heading-text: #0d47a1;
+  --card-bg: #fff;
+  --card-border: #e3e6ea;
+  --input-bg: #fff;
+  --input-border: #b3c6e0;
+  --input-focus: #1976d2;
+  --link: #1976d2;
+  --link-hover: #1565c0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  background: var(--main-bg);
+  color: var(--main-text);
+}
+
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  box-shadow: 0 2px 8px rgba(102,46,28,0.08);
+}
+header form {
+  display: inline;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+main {
+  padding: 2em 1em 0 1em;
+}
+
+footer {
+  background: #e3e6ea;
+  color: #222;
+  font-size: 1.1em;
+  box-shadow: 0 -2px 8px rgba(30,60,90,0.03);
+}
+
+h1, h2, h3, h4 {
+  color: #0d47a1;
+  margin-top: 0;
+}
+
+.btn, .btn-primary, .btn-success, .btn-outline-primary, .btn-footer {
+  display: inline-block;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6em 2em;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: filter 0.25s;
+  text-decoration: none;
+  margin: 0.2em 0.4em;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.06);
+}
+
+.btn, .btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn:hover, .btn:focus,
+.btn-success:hover, .btn-success:focus,
+.btn-outline:hover, .btn-outline:focus,
+.btn-footer:hover, .btn-footer:focus {
+  filter: brightness(0.88);
+  text-decoration: none;
+}
+
+.btn-success {
+  background: var(--success);
+  color: #fff;
+  transition: background 0.15s, filter 0.15s;
+}
+.btn-success:hover {
+  background: #388e3c;
+}
+.btn-outline-primary {
+  background: #fff;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+}
+.btn-outline-primary:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 2em;
+  margin: 1.5em 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  overflow: hidden;
+}
+thead tr {
+  background: #e3e6ea;
+}
+th, td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+tr:last-child td {
+  border-bottom: none;
+}
+
+form {
+  background: var(--card-bg);
+  padding: 2em 2em 1em 2em;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin: 1.5em auto;
+  max-width: 400px;
+}
+input[type="text"], input[type="email"], input[type="password"], textarea {
+  width: 100%;
+  padding: 0.7em 1em;
+  margin-bottom: 1.2em;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 1em;
+  background: #fafdff;
+  color: #222;
+}
+input[type="submit"], button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  padding: 0.7em 2em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+input[type="submit"]:hover, button[type="submit"]:hover {
+  background: var(--accent-hover);
+}
+
+/* Адаптивность */
+@media (max-width: 700px) {
+  .card, form {
+    padding: 1em;
+  }
+  main {
+    padding: 1em 0 0 0;
+  }
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+  th, td {
+    padding: 10px 5px;
+  }
+}

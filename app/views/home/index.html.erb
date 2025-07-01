@@ -1,0 +1,19 @@
+<div style="text-align:center; max-width:600px; margin: 0 auto;">
+  <h1 style="font-size:2.5em; margin-bottom:0.5em;">Ласкаво просимо до BlogNew!</h1>
+  <p style="font-size:1.2em; color:#555; margin-bottom:1.5em;">
+    Це сучасна платформа для ведення особистих блогів. Тут ви можете ділитися своїми думками, читати блоги інших користувачів та надихатися новими ідеями.
+  </p>
+  <ul style="text-align:left; display:inline-block; font-size:1.1em; color:#333; margin-bottom:2em;">
+    <li>Швидка реєстрація та зручний вхід</li>
+    <li>Публікація та редагування власних блогів</li>
+    <li>Можливість читати блоги без реєстрації</li>
+    <li>Проста та інтуїтивна навігація</li>
+  </ul>
+  <div style="margin-top:2em;">
+    <% unless user_signed_in? %>
+      <%= link_to 'Зареєструватися', new_user_registration_path, class: 'btn btn-success', style: 'font-size:1.2em; padding:0.7em 2em; border-radius:8px; background:#43a047; color:#fff; text-decoration:none; margin-right:1em;' %>
+      <span style="color:#888;">або</span>
+      <%= link_to 'Увійти', new_user_session_path, class: 'btn btn-outline-primary', style: 'font-size:1.2em; padding:0.7em 2em; border-radius:8px; border:1px solid #1976d2; color:#1976d2; text-decoration:none; margin-left:1em;' %>
+    <% end %>
+  </div>
+</div>
