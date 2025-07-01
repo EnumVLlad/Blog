@@ -47,9 +47,8 @@ class BlogsController < ApplicationController
     end
 
     def authorize_blog!
-      unless @blog.user == current_user
-        flash[:alert] = 'Ви не можете змінювати або видаляти цей блог.'
-        redirect_to blogs_path
+      unless @blog.user == current_user || current_user.admin?
+        redirect_to blogs_path, alert: 'Ви не маєте прав для цієї дії.'
       end
     end
 

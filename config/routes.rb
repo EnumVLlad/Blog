@@ -2,12 +2,10 @@ Rails.application.routes.draw do
   get 'blogs/index'
   devise_for :users
   root to: 'home#index'
-  get 'blogs', to: 'blogs#index'
-  get 'blogs/new', to: 'blogs#new', as: 'new_blog'
-  post 'blogs', to: 'blogs#create'
-  get 'blogs/:id/edit', to: 'blogs#edit', as: 'edit_blog'
-  patch 'blogs/:id', to: 'blogs#update', as: 'blog'
-  delete 'blogs/:id', to: 'blogs#destroy'
+  resources :blogs, only: [:index, :new, :create, :edit, :update, :destroy] do
+    resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create]
+  end
   get 'users', to: 'users#index'
   # Описуйте маршрути вашого застосунку відповідно до DSL: https://guides.rubyonrails.org/routing.html
 

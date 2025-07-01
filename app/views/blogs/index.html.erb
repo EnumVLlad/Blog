@@ -21,11 +21,46 @@
           <div style="color:#888; font-size:0.97em; display:flex; justify-content:space-between; align-items:center;">
             <span>Автор: <%= blog.user&.email || 'Гість' %></span>
             <span><%= l(blog.created_at, format: :short) %></span>
-            <% if user_signed_in? && blog.user == current_user %>
+            <% if user_signed_in? && (blog.user == current_user || current_user.admin?) %>
               <span style="display:flex; gap:0.5em; margin-left:1em;">
-                <%= link_to 'Редагувати', edit_blog_path(blog), class: 'btn', style: 'background:var(--accent); color:#fff; padding:0.4em 1.3em; font-size:0.98em; border-radius:8px; min-width:90px; margin-left:0; text-decoration:none; line-height:1; height:auto; vertical-align:middle;' %>
-                <%= button_to 'Видалити', blog_path(blog), method: :delete, data: { confirm: 'Ви впевнені, що хочете видалити цей блог?' }, class: 'btn', style: 'background:#c00; color:#fff; padding:0.4em 1.3em; font-size:0.98em; border-radius:8px; min-width:90px; margin-left:0;' %>
+                <%= link_to 'Редагувати', edit_blog_path(blog), class: 'btn', style: 'background:var(--accent); color:#fff; border-radius:8px; padding:0.4em 1.3em; font-size:0.98em; min-width:90px; margin-left:0; text-decoration:none; line-height:1; height:auto; vertical-align:middle;' %>
+                <%= button_to 'Видалити', blog_path(blog), method: :delete, data: { confirm: 'Ви впевнені, що хочете видалити цей блог?' }, class: 'btn', style: 'background:#c00; color:#fff; border-radius:8px; padding:0.4em 1.3em; font-size:0.98em; min-width:90px; margin-left:0; text-decoration:none; line-height:1; height:auto; vertical-align:middle;' %>
               </span>
+            <% end %>
+          </div>
+          <!-- Лайки/дизлайки -->
+          <div style="margin:0.7em 0 0.2em 0; display:flex; align-items:center; gap:1em;">
+            <%= form_with url: blog_likes_path(blog), method: :post, local: true, style: 'display:inline;' do %>
+              <%= hidden_field_tag :value, 1 %>
+              <button type="submit" class="like-btn" style="background:#2196f3; color:#fff; border:none; border-radius:5px; padding:0.3em 1.1em; margin-right:0.6em; font-size:1em; cursor:pointer; transition:filter .18s;">👍 <%= blog.likes.where(value: 1).count %></button>
+            <% end %>
+            <%= form_with url: blog_likes_path(blog), method: :post, local: true, style: 'display:inline;' do %>
+              <%= hidden_field_tag :value, -1 %>
+              <button type="submit" class="dislike-btn" style="background:#e53935; color:#fff; border:none; border-radius:5px; padding:0.3em 1.1em; font-size:1em; cursor:pointer; transition:filter .18s;">👎 <%= blog.likes.where(value: -1).count %></button>
+            <% end %>
+          </div>
+
+          <!-- Комментарии -->
+          <div style="margin-top:1.4em; background:#f7fafd; border-radius:8px; padding:1em 1.3em;">
+            <div style="font-weight:600; color:var(--accent); margin-bottom:0.5em;">Коментарі:</div>
+            <% blog.comments.each do |comment| %>
+              <div style="margin-bottom:0.7em; border-bottom:1px solid #e3e6ea; padding-bottom:0.5em; font-size:0.98em;">
+                <span style="color:#1976d2; font-weight:500;"><%= comment.user&.email || 'Гість' %>:</span>
+                <%= comment.body %>
+                <% if user_signed_in? && comment.user == current_user %>
+                  <%= button_to 'Видалити', blog_comment_path(blog, comment), method: :delete, data: { confirm: 'Видалити коментар?' }, class: 'btn btn-outline', style: 'margin-left:1em; padding:0.18em 0.9em; font-size:0.95em;' %>
+                <% end %>
+              </div>
+            <% end %>
+            <% if user_signed_in? %>
+              <%= form_with model: [blog, Comment.new], local: true do |f| %>
+                <div style="display:flex; gap:0.7em; align-items:center; margin-top:0.7em;">
+                  <%= f.text_field :body, required: true, maxlength: 1000, placeholder: 'Залишити коментар...', style: 'flex:1; padding:0.5em; border-radius:5px; border:1px solid #b3c6e0;' %>
+                  <%= f.submit 'Додати', class: 'btn', style: 'background:var(--accent); color:#fff; border-radius:6px; padding:0.45em 1.4em; font-size:1em; border:none;' %>
+                </div>
+              <% end %>
+            <% else %>
+              <div style="color:#888; font-size:0.96em; margin-top:0.5em;">Увійдіть, щоб залишити коментар.</div>
             <% end %>
           </div>
         </div>
