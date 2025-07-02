@@ -1,11 +1,8 @@
-# Сервис для отправки уведомлений в Telegram
-# В дальнейшем сюда нужно добавить реальный токен и chat_id
 require 'net/http'
 require 'uri'
 require 'json'
 
 class TelegramNotifier
-  # Заглушка для токена и chat_id
   BOT_TOKEN = '7272994970:AAF5PagvxFqv7sAjpUsDlB4P6EI7cZ0JmWE'
   CHAT_ID = '-1002835259112'
 
