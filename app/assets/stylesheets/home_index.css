@@ -1,0 +1,45 @@
+.home-main {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.home-header {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+.home-intro {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 1.5em;
+}
+.home-features {
+  text-align: left;
+  display: inline-block;
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: 2em;
+}
+.home-actions {
+  margin-top: 2em;
+}
+.home-signup-btn {
+  font-size: 1.2em;
+  padding: 0.7em 2em;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  margin-right: 1em;
+}
+.home-signin-btn {
+  font-size: 1.2em;
+  padding: 0.7em 2em;
+  border-radius: 8px;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  text-decoration: none;
+  margin-left: 1em;
+}
+.home-or {
+  color: #888;
+}

@@ -1,19 +1,19 @@
-<div style="text-align:center; max-width:600px; margin: 0 auto;">
-  <h1 style="font-size:2.5em; margin-bottom:0.5em;"><%= t('home.welcome') %></h1>
-  <p style="font-size:1.2em; color:#555; margin-bottom:1.5em;">
+<div class="home-main">
+  <h1 class="home-header"><%= t('home.welcome') %></h1>
+  <p class="home-intro">
     <%= t('home.intro') %>
   </p>
-  <ul style="text-align:left; display:inline-block; font-size:1.1em; color:#333; margin-bottom:2em;">
+  <ul class="home-features">
     <li><%= t('home.features.registration') %></li>
     <li><%= t('home.features.publish') %></li>
     <li><%= t('home.features.read_without_registration') %></li>
     <li><%= t('home.features.navigation') %></li>
   </ul>
-  <div style="margin-top:2em;">
+  <div class="home-actions">
     <% unless user_signed_in? %>
-      <%= link_to t('buttons.sign_up'), new_user_registration_path, class: 'btn btn-success', style: 'font-size:1.2em; padding:0.7em 2em; border-radius:8px; background:#43a047; color:#fff; text-decoration:none; margin-right:1em;' %>
-      <span style="color:#888;"><%= t('home.or') %></span>
-      <%= link_to t('buttons.sign_in'), new_user_session_path, class: 'btn btn-outline-primary', style: 'font-size:1.2em; padding:0.7em 2em; border-radius:8px; border:1px solid #1976d2; color:#1976d2; text-decoration:none; margin-left:1em;' %>
+      <%= link_to t('buttons.sign_up'), new_user_registration_path, class: 'btn btn-success home-signup-btn' %>
+      <span class="home-or"><%= t('home.or') %></span>
+      <%= link_to t('buttons.sign_in'), new_user_session_path, class: 'btn btn-outline-primary home-signin-btn' %>
     <% end %>
   </div>
 </div>

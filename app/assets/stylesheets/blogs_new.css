@@ -1,0 +1,58 @@
+.blog-new-card {
+  max-width: 520px;
+  margin: 2em auto;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 2em 2.2em 1.5em 2.2em;
+}
+
+.blog-new-header {
+  text-align: center;
+  color: var(--heading-text);
+  margin-bottom: 1.2em;
+}
+
+.blog-new-form-group {
+  margin-bottom: 1.2em;
+}
+
+.blog-new-label {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.blog-new-select {
+  margin-bottom: 0.7em;
+  margin-top: 0.2em;
+  border-radius: 6px;
+  padding: 0.3em 1.2em;
+  border: 1px solid var(--input-border);
+}
+
+.blog-new-input {
+  margin-top: 0.2em;
+}
+
+.blog-new-textarea {
+  margin-top: 0.2em;
+}
+
+.blog-new-actions {
+  text-align: center;
+}
+
+.blog-new-submit {
+  background: var(--accent);
+  color: var(--main-btn-text);
+  font-size: 1.1em;
+  border-radius: 8px;
+  padding: 0.7em 2.2em;
+  border: none;
+}
+
+.blog-new-cancel {
+  margin-left: 1em;
+  text-decoration: none;
+}

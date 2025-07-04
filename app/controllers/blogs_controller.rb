@@ -3,7 +3,33 @@ class BlogsController < ApplicationController
   before_action :authorize_blog!, only: [:edit, :update, :destroy]
 
   def index
-    @blogs = Blog.includes(:user).order(created_at: :desc)
+    @blogs = Blog.includes(:user)
+    if params[:q].present?
+      q = "%#{params[:q].strip}%"
+      @blogs = @blogs.where('title ILIKE ? OR body ILIKE ?', q, q)
+    end
+    if params[:category].present?
+      @blogs = @blogs.where(category: params[:category])
+    end
+
+    case params[:sort]
+    when 'oldest'
+      @blogs = @blogs.order(created_at: :asc)
+    when 'likes_desc'
+      @blogs = @blogs.left_joins(:likes).group('blogs.id').order('COUNT(likes.id) DESC')
+    when 'likes_asc'
+      @blogs = @blogs.left_joins(:likes).group('blogs.id').order('COUNT(likes.id) ASC')
+    when 'views_desc'
+      @blogs = @blogs.order(views: :desc)
+    when 'views_asc'
+      @blogs = @blogs.order(views: :asc)
+    when 'title_asc'
+      @blogs = @blogs.order(title: :asc)
+    when 'title_desc'
+      @blogs = @blogs.order(title: :desc)
+    else
+      @blogs = @blogs.order(created_at: :desc)
+    end
   end
 
   def new

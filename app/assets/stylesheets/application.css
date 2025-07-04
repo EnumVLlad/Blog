@@ -15,6 +15,13 @@
  */
 
 :root {
+  --search-bg: #fff;
+  --search-input-bg: #f8fbfd;
+  --search-input-border: #dbe6f3;
+  --search-input-focus: #1976d2;
+  --search-btn-bg: #cfd8dc;
+  --search-btn-hover: #b0bec5;
+  --search-btn-icon: #fff;
   --main-bg: #f5f7fa;
   --header-bg: #1976d2;
   --header-text: #fff;
@@ -111,12 +118,12 @@ h1, h2, h3, h4 {
 }
 
 .btn-success {
-  background: var(--success);
+  background: var(--accent);
   color: #fff;
   transition: background 0.15s, filter 0.15s;
 }
 .btn-success:hover {
-  background: #388e3c;
+  background: var(--accent-hover);
 }
 .btn-outline-primary {
   background: #fff;

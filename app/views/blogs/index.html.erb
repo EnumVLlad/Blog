@@ -1,37 +1,66 @@
-<div style="text-align:center; max-width:700px; margin: 0 auto;">
+<div class="blog-main">
+  <h1 class="blog-header"><%= t('site.header') %></h1>
+  <p class="blog-subheader"><%= t('site.subheader') %></p>
+  <div class="search-box-container">
+    <%= form_with url: blogs_path, method: :get, local: true, class: 'search-form search-form-with-category' do %>
+      <%= hidden_field_tag :locale, I18n.locale %>
+      <div class="search-fields-row">
+        <%= text_field_tag :q, params[:q], placeholder: t('site.search_placeholder'), class: 'search-input', autocomplete: 'off' %>
+        <%= select_tag :category, options_for_select(Blog::CATEGORY_OPTIONS.map { |c| [t("categories." + c), c] }, params[:category].presence), include_blank: t('categories.all'), class: 'category-select' %>
+      </div>
+      <button type="submit" class="search-btn">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="white" stroke-width="2"/>
+          <line x1="17" y1="17" x2="21" y2="21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    <% end %>
+  </div>
+  <div class="sort-box">
+    <%= form_with url: blogs_path, method: :get, local: true, class: 'sort-form' do %>
+      <%= hidden_field_tag :locale, I18n.locale %>
+      <span class="sort-label"><%= t('site.sorting', default: 'Sorting') %></span>
+      <%= hidden_field_tag :q, params[:q] %>
+      <select name="sort" class="sort-select" onchange="this.form.submit()">
+        <option value="newest" <%= 'selected' if params[:sort] == 'newest' || params[:sort].blank? %>><%= t('site.sorting_newest') %></option>
+        <option value="oldest" <%= 'selected' if params[:sort] == 'oldest' %>><%= t('site.sorting_oldest') %></option>
+        <option value="likes_desc" <%= 'selected' if params[:sort] == 'likes_desc' %>><%= t('site.sorting_likes_desc') %></option>
+        <option value="likes_asc" <%= 'selected' if params[:sort] == 'likes_asc' %>><%= t('site.sorting_likes_asc') %></option>
+        <option value="views_desc" <%= 'selected' if params[:sort] == 'views_desc' %>><%= t('site.sorting_views_desc') %></option>
+        <option value="views_asc" <%= 'selected' if params[:sort] == 'views_asc' %>><%= t('site.sorting_views_asc') %></option>
+        <option value="title_asc" <%= 'selected' if params[:sort] == 'title_asc' %>><%= t('site.sorting_title_asc') %></option>
+        <option value="title_desc" <%= 'selected' if params[:sort] == 'title_desc' %>><%= t('site.sorting_title_desc') %></option>
+      </select>
+    <% end %>
+  </div>
 
-  <h1 style="color: #0d47a1; text-align:center; margin-bottom:0.6em;"><%= t('site.header') %></h1>
-  <p style="text-align:center; color:#555; margin-bottom:2em;"><%= t('site.subheader') %></p>
   <% if user_signed_in? %>
-    <%= link_to t('buttons.create_blog'), new_blog_path, class: 'btn btn-success', style: 'font-size:1.1em; padding:0.6em 2em; border-radius:8px; background:#1976d2; color:#fff; text-decoration:none;' %>
+    <%= link_to t('buttons.create_blog'), new_blog_path, class: 'btn btn-success blog-create-btn' %>
   <% else %>
-    <span style="color:#888;"><%= t('site.login_to_add_blog') %></span>
+    <span class="blog-login-msg"><%= t('site.login_to_add_blog') %></span>
   <% end %>
-
-  <div style="max-width:700px; margin:2em auto 0 auto;">
+  <div class="blogs-list">
     <% if @blogs.present? %>
       <% @blogs.each do |blog| %>
-        <div class="card" style="background:#fff; border:1px solid #e3e6ea; border-radius:12px; box-shadow:0 2px 8px rgba(30,60,90,0.06); margin-bottom:1.7em; padding:1.5em 2em;">
-          <div style="display:flex; align-items:center; gap:1em; margin-bottom:0.7em;">
-            <span style="display:inline-block; font-size:0.98em; color:#888; font-weight:400; margin-right:1em; background:#f1f3f6; border-radius:5px; padding:0.15em 0.7em;">
-              <%= t("categories." + blog.category) %>
-            </span>
-            <span style="font-size:1.35em; color:var(--accent); font-weight:600;"> <%= blog.title %> </span>
+        <div class="blog-card">
+          <div class="blog-card-header">
+            <span class="blog-category"><%= t("categories." + blog.category) %></span>
+            <span class="blog-title"><%= blog.title %></span>
           </div>
-          <div style="display:flex; gap:1em; align-items:center; margin-top:1em;">
-            <%= link_to t('buttons.view'), blog_path(blog), class: 'btn btn-primary', style: 'background:#1976d2; color:#fff; border-radius:8px; padding:0.4em 1.3em; font-size:0.98em; min-width:90px; text-decoration:none; line-height:1; height:auto; vertical-align:middle;' %>
-            <span style="color:#888; font-size:1em; margin-left:0.7em; display:flex; align-items:center; gap:0.3em;">
+          <div class="blog-card-actions">
+            <%= link_to t('buttons.view'), blog_path(blog), class: 'btn btn-primary blog-view-btn' %>
+            <span class="blog-views">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path fill="#888" d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7Zm0 12c-4.97 0-8.19-4.18-9.05-5C3.81 11.18 7.03 7 12 7s8.19 4.18 9.05 5c-.86.82-4.08 5-9.05 5Zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
               <%= blog.views %>
             </span>
             <% if user_signed_in? && (blog.user == current_user || current_user.admin?) %>
-              <%= button_to t('buttons.delete'), blog_path(blog), method: :delete, data: { confirm: t('buttons.delete_blog_confirm') }, class: 'btn', style: 'background:#c00; color:#fff; border-radius:8px; padding:0.4em 1.3em; font-size:0.98em; min-width:90px; text-decoration:none; line-height:1; height:auto; vertical-align:middle;' %>
+              <%= button_to t('buttons.delete'), blog_path(blog), method: :delete, data: { confirm: t('buttons.delete_blog_confirm') }, class: 'btn blog-delete-btn' %>
             <% end %>
           </div>
         </div>
       <% end %>
     <% else %>
-      <div style="text-align:center; color:#888; margin-top:2em;"><%= t('site.no_blogs') %></div>
+      <div class="blog-no-blogs"><%= t('site.no_blogs') %></div>
     <% end %>
   </div>
 </div>

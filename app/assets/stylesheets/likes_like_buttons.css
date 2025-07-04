@@ -1,0 +1,27 @@
+.like-buttons-block {
+  margin: 0.7em 0 0.2em 0;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.like-btn {
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3em 1.1em;
+  margin-right: 0.6em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: filter .18s;
+}
+.dislike-btn {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3em 1.1em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: filter .18s;
+}

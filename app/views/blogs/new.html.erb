@@ -1,21 +1,21 @@
-<div class="card" style="max-width:520px; margin:2em auto;">
-  <h1 style="text-align:center; color:var(--heading-text); margin-bottom:1.2em;"><%= t('blogs.new_header') %></h1>
+<div class="blog-new-card">
+  <h1 class="blog-new-header"><%= t('blogs.new_header') %></h1>
   <%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
-    <div style="margin-bottom:1.2em;">
-      <%= form.label :category, t('blogs.category_label'), style: 'color:var(--accent); font-weight:500;' %>
-      <%= form.select :category, Blog::CATEGORY_OPTIONS.map { |cat| [t("categories." + cat), cat] }, {}, style: 'margin-bottom:0.7em; margin-top:0.2em; border-radius:6px; padding:0.3em 1.2em; border:1px solid #b3c6e0;' %>
+    <div class="blog-new-form-row">
+      <%= form.label :category, t('blogs.category_label'), class: 'blog-new-label' %>
+      <%= form.select :category, Blog::CATEGORY_OPTIONS.map { |cat| [t("categories." + cat), cat] }, {}, class: 'blog-new-select' %>
     </div>
-    <div style="margin-bottom:1.2em;">
-      <%= form.label :title, t('blogs.title_label'), style: 'color:var(--accent); font-weight:500;' %>
-      <%= form.text_field :title, required: true, maxlength: 120, placeholder: t('blogs.title_placeholder'), style: 'margin-top:0.2em;' %>
+    <div class="blog-new-form-row">
+      <%= form.label :title, t('blogs.title_label'), class: 'blog-new-label' %>
+      <%= form.text_field :title, required: true, maxlength: 120, placeholder: t('blogs.title_placeholder'), class: 'blog-new-input' %>
     </div>
-    <div style="margin-bottom:1.2em;">
-      <%= form.label :body, t('blogs.body_label'), style: 'color:var(--accent); font-weight:500;' %>
-      <%= form.text_area :body, required: true, rows: 8, placeholder: t('blogs.body_placeholder'), style: 'margin-top:0.2em;' %>
+    <div class="blog-new-form-row">
+      <%= form.label :body, t('blogs.body_label'), class: 'blog-new-label' %>
+      <%= form.text_area :body, required: true, rows: 8, placeholder: t('blogs.body_placeholder'), class: 'blog-new-textarea' %>
     </div>
-    <div style="text-align:center;">
-      <%= form.submit t('buttons.save'), class: 'btn', style: 'background:var(--accent); color:#fff; font-size:1.1em; border-radius:8px; padding:0.7em 2.2em; border:none;' %>
-      <%= link_to t('buttons.cancel'), blogs_path, class: 'btn btn-outline', style: 'margin-left:1em; text-decoration:none;' %>
+    <div class="blog-new-actions">
+      <%= form.submit t('buttons.save'), class: 'btn blog-new-submit-btn' %>
+      <%= link_to t('buttons.cancel'), blogs_path, class: 'btn btn-outline blog-new-cancel-btn' %>
     </div>
   <% end %>
 </div>

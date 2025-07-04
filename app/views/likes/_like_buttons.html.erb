@@ -1,16 +1,16 @@
-<div style="margin:0.7em 0 0.2em 0; display:flex; align-items:center; gap:1em;">
-  <%= form_with url: blog_likes_path(blog), method: :post, local: true, style: 'display:inline;' do %>
+<div class="like-buttons-block">
+  <%= form_with url: blog_likes_path(blog), method: :post, local: true, html: { class: 'like-form' } do %>
     <%= hidden_field_tag :value, 1 %>
     <% if controller.controller_name == 'blogs' && controller.action_name == 'show' %>
       <%= hidden_field_tag :redirect_to_show, true %>
     <% end %>
-    <button type="submit" class="like-btn" style="background:#2196f3; color:#fff; border:none; border-radius:5px; padding:0.3em 1.1em; margin-right:0.6em; font-size:1em; cursor:pointer; transition:filter .18s;">👍 <%= t('buttons.like') %> (<%= blog.likes.where(value: 1).count %>)</button>
+    <button type="submit" class="like-btn">👍 <%= t('buttons.like') %> (<%= blog.likes.where(value: 1).count %>)</button>
   <% end %>
-  <%= form_with url: blog_likes_path(blog), method: :post, local: true, style: 'display:inline;' do %>
+  <%= form_with url: blog_likes_path(blog), method: :post, local: true, html: { class: 'like-form' } do %>
     <%= hidden_field_tag :value, -1 %>
     <% if controller.controller_name == 'blogs' && controller.action_name == 'show' %>
       <%= hidden_field_tag :redirect_to_show, true %>
     <% end %>
-    <button type="submit" class="dislike-btn" style="background:#e53935; color:#fff; border:none; border-radius:5px; padding:0.3em 1.1em; font-size:1em; cursor:pointer; transition:filter .18s;">👎 <%= t('buttons.dislike') %> (<%= blog.likes.where(value: -1).count %>)</button>
+    <button type="submit" class="dislike-btn">👎 <%= t('buttons.dislike') %> (<%= blog.likes.where(value: -1).count %>)</button>
   <% end %>
 </div>
