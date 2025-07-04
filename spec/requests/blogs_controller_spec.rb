@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Blogs", type: :request do
-  let!(:user) { User.create!(email: "blogtest@test.com", password: "password", role: "user") }
+  let!(:user) { user }
 
   describe "GET /blogs" do
     it "returns http success" do

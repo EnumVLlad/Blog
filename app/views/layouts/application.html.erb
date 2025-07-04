@@ -14,16 +14,25 @@
     <header style="width:100%; background: var(--header-bg); display:flex; justify-content:space-between; align-items:center; padding: 1em 2em; box-sizing: border-box;">
       <div class="header-home-icon" style="display:flex; align-items:center;">
         <%= link_to root_path, style: 'display:inline-block; padding-right:1.2em;' do %>
-          <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Головна" style="width:32px; filter:brightness(0) invert(1); vertical-align:middle;" />
+          <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="<%= t('layout.home_alt') %>" style="width:32px; filter:brightness(0) invert(1); vertical-align:middle;" />
         <% end %>
       </div>
       <div class="header-user-info" style="display:flex; align-items:center; gap:1em; color:#fff;">
         <% if user_signed_in? %>
-          <span style="color:#fff; font-weight:500;">Вітаємо, <%= current_user.email %>!</span>
-          <%= link_to image_tag('https://cdn-icons-png.flaticon.com/512/747/747376.png', alt: 'Профіль', style: 'width:32px;vertical-align:middle;filter:brightness(0) invert(1);'), edit_user_registration_path %>
-          <%= button_to 'Вийти', destroy_user_session_path, method: :delete, form: {style: 'display:inline'}, class: 'btn', style: 'background:#1565c0; color:#fff; border:none; padding:0.5em 1.2em; border-radius:6px; font-size:1em; cursor:pointer; margin-left:0.5em;' %>
+          <span style="color:#fff; font-weight:500;"><%= t('layout.welcome_user', user: current_user.email) %></span>
+          <%= link_to image_tag('https://cdn-icons-png.flaticon.com/512/747/747376.png', alt: t('layout.profile_alt'), style: 'width:32px;vertical-align:middle;filter:brightness(0) invert(1);'), edit_user_registration_path %>
+          <%= button_to t('buttons.logout'), destroy_user_session_path, method: :delete, form: {style: 'display:inline'}, class: 'btn', style: 'background:#1565c0; color:#fff; border:none; padding:0.5em 1.2em; border-radius:6px; font-size:1em; cursor:pointer; margin-left:0.5em;' %>
+          <% if I18n.locale.to_s == 'en' %>
+            <%= link_to url_for(locale: 'uk'), style: 'margin-left:0.8em;' do %>
+              <img src="https://flagcdn.com/24x18/ua.png" alt="Українська" style="width:24px; height:18px; border-radius:3px; border:1px solid #ccc; vertical-align:middle;" />
+            <% end %>
+          <% else %>
+            <%= link_to url_for(locale: 'en'), style: 'margin-left:0.8em;' do %>
+              <img src="https://flagcdn.com/24x18/gb.png" alt="English" style="width:24px; height:18px; border-radius:3px; border:1px solid #ccc; vertical-align:middle;" />
+            <% end %>
+          <% end %>
         <% else %>
-          <%= link_to image_tag('https://cdn-icons-png.flaticon.com/512/747/747545.png', alt: 'Увійти', style: 'width:32px;vertical-align:middle;filter:brightness(0) invert(1);'), new_user_session_path %>
+          <%= link_to image_tag('https://cdn-icons-png.flaticon.com/512/747/747545.png', alt: t('layout.login_alt'), style: 'width:32px;vertical-align:middle;filter:brightness(0) invert(1);'), new_user_session_path %>
         <% end %>
       </div>
     </header>
@@ -33,7 +42,7 @@
     </main>
 
     <footer style="width:100%; background: var(--main-bg); color: var(--main-text); display:flex; justify-content:center; align-items:center; padding: 1.2em 0; box-sizing: border-box;">
-      <%= link_to 'Блоги', blogs_path, class: 'btn', style: 'background: var(--accent); color: #fff; margin:0 1em; font-size:1.1em; border-radius:8px; padding:0.6em 2em; border:none; box-shadow:0 2px 8px rgba(25,118,210,0.06); transition:background 0.15s; text-decoration:none;' %>
+      <%= link_to t('buttons.blogs'), blogs_path, class: 'btn', style: 'background: var(--accent); color: #fff; margin:0 1em; font-size:1.1em; border-radius:8px; padding:0.6em 2em; border:none; box-shadow:0 2px 8px rgba(25,118,210,0.06); transition:background 0.15s; text-decoration:none;' %>
     </footer>
   </body>
 </html>

@@ -3,12 +3,11 @@ require 'uri'
 require 'json'
 
 class TelegramNotifier
-  BOT_TOKEN = '7272994970:AAF5PagvxFqv7sAjpUsDlB4P6EI7cZ0JmWE'
-  CHAT_ID = '-1002835259112'
+  BOT_TOKEN = ENV['BOT_TOKEN']
+  CHAT_ID = ENV['CHAT_ID']
 
-  # Метод для отправки уведомления
   def self.notify_new_post(title, url)
-    message = "<b>#{title}</b>\n\nесли хочешь почитать — переходи к нам!\n#{url}"
+    message = "<b>#{title}</b>\n\nЯкщо хочеш глянуть, переходь до нас!\n#{url}"
     uri = URI("https://api.telegram.org/bot#{BOT_TOKEN}/sendMessage")
     params = {
       chat_id: CHAT_ID,

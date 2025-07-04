@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Comments", type: :request do
-  let!(:blog) { Blog.create!(title: "Test Blog", body: "Body", user: User.create!(email: "test@test.com", password: "password", role: "user")) }
+  let!(:blog) { create(:blog) }
 
   describe "POST /blogs/:blog_id/comments" do
     it "returns http redirect (302)" do
@@ -11,7 +11,7 @@ RSpec.describe "Comments", type: :request do
   end
 
   describe "DELETE /blogs/:blog_id/comments/:id" do
-    let!(:comment) { blog.comments.create!(body: "Test comment", user: blog.user) }
+    let!(:comment) { create(:comment, blog: blog, user: blog.user) }
     it "returns http redirect (302)" do
       delete blog_comment_path(blog, comment)
       expect(response).to have_http_status(302)

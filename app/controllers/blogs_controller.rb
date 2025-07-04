@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:edit, :update, :destroy]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy]
   before_action :authorize_blog!, only: [:edit, :update, :destroy]
 
   def index
@@ -41,6 +41,11 @@ class BlogsController < ApplicationController
     redirect_to blogs_path
   end
 
+  def show
+    # @blog уже установлен через set_blog
+    @blog.update_column(:views, @blog.views + 1)
+  end
+
   private
     def set_blog
       @blog = Blog.find(params[:id])
@@ -53,6 +58,6 @@ class BlogsController < ApplicationController
     end
 
     def blog_params
-      params.require(:blog).permit(:title, :body)
+      params.require(:blog).permit(:title, :body, :category)
     end
 end

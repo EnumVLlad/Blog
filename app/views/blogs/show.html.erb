@@ -1,0 +1,16 @@
+<h1><%= @blog.title %></h1>
+<p><%= @blog.body %></p>
+
+<div>
+  <%= render 'likes/like_buttons', blog: @blog %>
+</div>
+
+<div>
+  <%= render 'comments/comments', blog: @blog %>
+</div>
+
+<% if user_signed_in? && (current_user == @blog.user || current_user.admin?) %>
+  <%= link_to t('buttons.edit'), edit_blog_path(@blog), class: 'btn btn-warning' %>
+<% end %>
+
+<%= link_to t('buttons.back'), blogs_path, class: 'btn btn-secondary' %>

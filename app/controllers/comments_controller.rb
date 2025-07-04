@@ -6,9 +6,17 @@ class CommentsController < ApplicationController
     @comment = @blog.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to blogs_path(anchor: "blog-#{@blog.id}"), notice: 'Коментар додано.'
+      if params[:redirect_to_show]
+        redirect_to blog_path(@blog), notice: 'Коментар додано.'
+      else
+        redirect_to blogs_path(anchor: "blog-#{@blog.id}"), notice: 'Коментар додано.'
+      end
     else
-      redirect_to blogs_path(anchor: "blog-#{@blog.id}"), alert: 'Помилка: коментар не збережено.'
+      if params[:redirect_to_show]
+        redirect_to blog_path(@blog), alert: 'Помилка: коментар не збережено.'
+      else
+        redirect_to blogs_path(anchor: "blog-#{@blog.id}"), alert: 'Помилка: коментар не збережено.'
+      end
     end
   end
 
@@ -16,7 +24,11 @@ class CommentsController < ApplicationController
     @comment = @blog.comments.find(params[:id])
     if @comment.user == current_user || current_user.admin?
       @comment.destroy
-      redirect_to blogs_path(anchor: "blog-#{@blog.id}"), notice: 'Коментар видалено.'
+      if params[:redirect_to_show]
+        redirect_to blog_path(@blog), notice: 'Коментар видалено.'
+      else
+        redirect_to blogs_path(anchor: "blog-#{@blog.id}"), notice: 'Коментар видалено.'
+      end
     else
       redirect_to blogs_path(anchor: "blog-#{@blog.id}"), alert: 'Ви не маєте прав для видалення цього коментаря.'
     end
