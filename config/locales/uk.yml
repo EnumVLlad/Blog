@@ -1,4 +1,18 @@
 uk:
+  pay:
+    requires_action:
+      card: "Номер картки"
+      full_name: "Ім'я на картці"
+      button: "Сплатити %{amount}"
+      header: "Підтвердіть платіж на %{amount}"
+      description: "Щоб завершити оплату, введіть дані картки."
+    back: "Повернутись до блогу"
+    successful:
+      header: "Оплата успішна"
+      description: "Доступ до поста відкрито. Дякуємо за оплату!"
+    cancelled:
+      header: "Оплату скасовано"
+      description: "Платіж не виконано. Ви можете спробувати ще раз."
   categories:
     all: "Усі теми"
     travel: "Подорожі"
@@ -41,6 +55,42 @@ uk:
     body_label: "Текст блогу"
     body_placeholder: "Ваш блог..."
     category_label: "Категорія"
+    paid_label: "Платний пост?"
+    pay_button: "Сплатити"
+    pay: "Сплатити"
+    card_number_placeholder: "0000 0000 0000 0000"
+    card_expiry_placeholder: "MM/YY"
+    card_cvc_placeholder: "CVC"
+    payment_title_with_price: "Оплата за пост (1 ₴)"
+    payment_success: "Оплачено!"
+    payment_processing: "Оплата..."
+    payment_access_granted: "Доступ до поста оплачено!"
+    payment_required: "Щоб переглянути цей пост, потрібно оплатити доступ."
+    payment_redirecting: "Переадресація..."
+    payment_error: "Помилка оплати. Спробуйте ще раз."
+    already_paid: "Ви вже оплатили цей пост."
+    only_owner_or_admin: "Тільки автор або адміністратор має доступ до цього поста без оплати."
+    pay_form_title: "Оплата доступу до поста"
+    card_number: "Номер картки"
+    card_expiry: "Термін дії"
+    card_cvc: "CVC"
+    pay_success_notice: "Доступ оплачено!"
+    pay_error_notice: "Оплата не вдалася. Спробуйте ще раз."
+    pay_redirect_notice: "Зараз ви будете перенаправлені до поста."
+  errors:
+    sprockets_permission: "Помилка доступу до файлів кешу ассетів. Спробуйте перезапустити сервер або перевірте права на папку tmp/cache/assets."
+    migration_pending: "Потрібно застосувати міграції бази даних. Запустіть: rails db:migrate."
+    permission_denied: "Відмовлено у доступі. Перевірте права користувача або файлів."
+    file_locked: "Файл заблоковано іншою програмою. Закрийте редактор або перезапустіть комп'ютер."
+  test:
+    all_passed: "Всі тести пройдено успішно."
+    pending: "Є тести, що очікують реалізації."
+    no_failures: "Жодного провалу тестів."
+    migration_error: "Помилка: не застосовано міграції для тестового середовища."
+    permission_error: "Помилка прав доступу під час тестування."
+    cache_cleared: "Кеш очищено."
+    run_tests: "Запустіть тести командою rspec."
+
   buttons:
     like: "Лайк"
     dislike: "Дизлайк"

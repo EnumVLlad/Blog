@@ -1,0 +1,31 @@
+.pay-spinner {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid #fff;
+  border-top: 2px solid #2563eb;
+  border-radius: 50%;
+  animation: pay-spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+@keyframes pay-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.pay-checkmark {
+  color: #22c55e;
+  font-size: 1.4em;
+  font-weight: bold;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+.pay-success {
+  background: #22c55e !important;
+  border-color: #22c55e !important;
+  color: #fff !important;
+}
+.pay-animating {
+  pointer-events: none;
+  opacity: 0.85;
+}

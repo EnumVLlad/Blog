@@ -7,16 +7,25 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!payBtn) return;
     e.preventDefault();
 
-    // Disable button and show loading
-    payBtn.disabled = true;
-    payBtn.innerHTML = '<span class="pay-spinner"></span> Оплата...';
-    payBtn.classList.add('pay-animating');
-
-    // Имитация "оплаты" и анимация галочки
+    // Показываем крутилку и текст 'Оплата...' в следующем event loop
     setTimeout(function () {
-      payBtn.innerHTML = '<span class="pay-checkmark">✔</span> Оплачено!';
-      payBtn.classList.add('pay-success');
-      // Не отправляем форму автоматически, чтобы пользователь мог наблюдать анимацию
-    }, 1200); // "Оплата" 1.2 сек
+      payBtn.disabled = true;
+      payBtn.innerHTML = '<span class="pay-spinner"></span> Оплата...';
+      payBtn.classList.add('pay-animating');
+
+      // Имитация "оплаты" и анимация галочки
+      setTimeout(function () {
+        payBtn.innerHTML = '<span class="pay-checkmark">✔</span> Оплачено!';
+        payBtn.classList.add('pay-success');
+        setTimeout(function () {
+          var redirectUrl = paymentForm.getAttribute('data-redirect-url');
+          if (redirectUrl) {
+            window.location = redirectUrl;
+          } else {
+            paymentForm.submit();
+          }
+        }, 500); // 0.5 сек после галочки
+      }, 1200); // "Оплата" 1.2 сек
+    }, 20); // Дать браузеру время отрисовать крутилку
   });
 });

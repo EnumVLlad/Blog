@@ -1,95 +1,29 @@
-<script>
-// --- payment_animation.js ---
-document.addEventListener('DOMContentLoaded', function () {
-  var paymentForm = document.querySelector('.payment-modal form');
-  if (!paymentForm) return;
-
-  paymentForm.addEventListener('submit', function (e) {
-    var payBtn = paymentForm.querySelector('button[type="submit"]');
-    if (!payBtn) return;
-    e.preventDefault();
-
-    // Показываем крутилку и текст 'Оплата...' в следующем event loop
-    setTimeout(function () {
-      payBtn.disabled = true;
-      payBtn.innerHTML = '<span class="pay-spinner"></span> Оплата...';
-      payBtn.classList.add('pay-animating');
-
-      // Имитация "оплаты" и анимация галочки
-      setTimeout(function () {
-        payBtn.innerHTML = '<span class="pay-checkmark">✔</span> Оплачено!';
-        payBtn.classList.add('pay-success');
-        setTimeout(function () {
-          var redirectUrl = paymentForm.getAttribute('data-redirect-url');
-          if (redirectUrl) {
-            window.location = redirectUrl;
-          } else {
-            paymentForm.submit();
-          }
-        }, 500); // 0.5 сек после галочки
-      }, 1200); // "Оплата" 1.2 сек
-    }, 20); // Дать браузеру время отрисовать крутилку
-  });
-});
-// --- /payment_animation.js ---
-</script>
-<style>
-.pay-spinner {
-  display: inline-block;
-  width: 1.2em;
-  height: 1.2em;
-  border: 2px solid #fff;
-  border-top: 2px solid #2563eb;
-  border-radius: 50%;
-  animation: pay-spin 0.7s linear infinite;
-  vertical-align: middle;
-  margin-right: 0.5em;
-}
-@keyframes pay-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-.pay-checkmark {
-  color: #22c55e;
-  font-size: 1.4em;
-  font-weight: bold;
-  vertical-align: middle;
-  margin-right: 0.5em;
-}
-.pay-success {
-  background: #22c55e !important;
-  border-color: #22c55e !important;
-  color: #fff !important;
-}
-.pay-animating {
-  pointer-events: none;
-  opacity: 0.85;
-}
-</style>
+<%= stylesheet_link_tag 'payment_animation', media: 'all' %>
 <script src="/assets/payment_animation.js"></script>
 
 <div class="payment-modal" style="max-width: 400px; margin: 3em auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 32px #0001; padding: 2em;">
-  <h2 style="text-align:center;">Оплата за пост</h2>
-  <div style="text-align:center; margin-bottom: 1.5em; font-size: 1.2em;">
-    Вартість доступу: <span style="font-weight: bold; color: #2563eb;">1 ₴</span>
-  </div>
+  <h2 style="text-align:center;"><%= t('blogs.payment_title_with_price') %></h2>
   <%= form_with url: pay_blog_path(@blog), method: :post, local: true, html: { 'data-redirect-url': blog_path(@blog) } do |f| %>
     <div class="form-group" style="margin-bottom:1em;">
-      <label for="card_number">Номер картки</label>
-      <input type="text" name="card_number" id="card_number" class="form-control" maxlength="19" pattern="[0-9 ]{16,19}" required placeholder="0000 0000 0000 0000" style="width:100%;padding:0.5em;"/>
+      <label for="card_number"><%= t('blogs.card_number') %></label>
+      <%= text_field_tag :card_number, nil, id: 'card_number', class: 'form-control', maxlength: 19, pattern: '[0-9 ]{16,19}', required: true, placeholder: t('blogs.card_number_placeholder'), autocomplete: 'cc-number', inputmode: 'numeric', style: 'width:100%;padding:0.5em;' %>
     </div>
     <div class="form-group" style="margin-bottom:1em; display: flex; gap: 1em;">
       <div style="flex:1;">
-        <label for="exp">Термін дії</label>
-        <input type="text" name="exp" id="exp" class="form-control" maxlength="5" pattern="[0-9/]{5}" required placeholder="MM/YY" style="width:100%;padding:0.5em;"/>
+        <label for="exp"><%= t('blogs.card_expiry') %></label>
+        <%= text_field_tag :exp, nil, id: 'exp', class: 'form-control', maxlength: 5, pattern: '[0-9]{2}/[0-9]{2}', required: true, placeholder: t('blogs.card_expiry_placeholder'), autocomplete: 'cc-exp', inputmode: 'numeric', style: 'width:100%;padding:0.5em;' %>
       </div>
       <div style="flex:1;">
-        <label for="cvc">CVC</label>
-        <input type="text" name="cvc" id="cvc" class="form-control" maxlength="4" pattern="[0-9]{3,4}" required placeholder="CVC" style="width:100%;padding:0.5em;"/>
+        <label for="cvc"><%= t('blogs.card_cvc') %></label>
+        <%= text_field_tag :cvc, nil, id: 'cvc', class: 'form-control', maxlength: 4, pattern: '[0-9]{3,4}', required: true, placeholder: t('blogs.card_cvc_placeholder'), autocomplete: 'cc-csc', inputmode: 'numeric', style: 'width:100%;padding:0.5em;' %>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" style="width:100%;font-size:1.1em;">Оплатити 1 ₴</button>
-    <%= link_to 'Скасувати', blog_path(@blog), class: 'btn btn-outline', style: 'width:100%;margin-top:1em;' %>
+    <div style="display: flex; justify-content: center; margin-top: 2em;">
+      <button type="submit" class="btn btn-primary" style="font-size:1.1em; min-width: 120px; text-align:center;"><%= t('blogs.pay') %></button>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 2em;">
+      <%= link_to t('buttons.cancel'), blog_path(@blog), class: 'btn btn-danger d-flex justify-content-center align-items-center', style: 'font-size:1.1em; min-width: 90px; display: flex; align-items: center; justify-content: center;' %>
+    </div>
   <% end %>
 </div>

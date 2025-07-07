@@ -1,4 +1,18 @@
 en:
+  pay:
+    requires_action:
+      card: "Card number"
+      full_name: "Cardholder name"
+      button: "Pay %{amount}"
+      header: "Confirm payment of %{amount}"
+      description: "To complete payment, enter your card details."
+    back: "Back to blog"
+    successful:
+      header: "Payment successful"
+      description: "Access to the post is granted. Thank you for your payment!"
+    cancelled:
+      header: "Payment cancelled"
+      description: "Payment was not completed. You can try again."
   categories:
     all: "All topics"
     travel: "Travel"
@@ -42,6 +56,11 @@ en:
     body_label: "Blog Content"
     body_placeholder: "Your blog..."
     category_label: "Category"
+    pay: "Pay"
+    card_number_placeholder: "0000 0000 0000 0000"
+    card_expiry_placeholder: "MM/YY"
+    card_cvc_placeholder: "CVC"
+    payment_title_with_price: "Post access payment (1 UAH)"
   buttons:
     like: "Like"
     dislike: "Dislike"

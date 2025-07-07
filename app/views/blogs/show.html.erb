@@ -1,13 +1,12 @@
 <% if @access_denied %>
   <div class="paid-access-denied" style="text-align: center; margin: 3em 0;">
-    <h2>Цей пост доступний тільки після оплати</h2>
-    <p>Щоб переглянути цей пост, потрібно оплатити доступ.</p>
+    <h2><%= t('blogs.payment_required') %></h2>
     <% if user_signed_in? %>
-      <%= link_to 'Оплатити', payment_blog_path(@blog), class: 'btn btn-primary', style: 'margin: 1.5em 0 0 0;' %>
+      <%= link_to t('blogs.pay'), payment_blog_path(@blog), class: 'btn btn-primary', style: 'margin: 1.5em 0 0 0;' %>
     <% else %>
       <p style="margin: 1.5em 0 0 0;">Увійдіть у акаунт, щоб оплатити доступ.</p>
     <% end %>
-    <%= link_to 'Повернутись до блогу', blogs_path, class: 'btn btn-secondary', style: 'margin-top: 1.5em;' %>
+    <%= link_to t('buttons.back'), blogs_path, class: 'btn btn-secondary', style: 'margin-top: 1.5em;' %>
   </div>
 <% else %>
   <h1><%= @blog.title %></h1>
