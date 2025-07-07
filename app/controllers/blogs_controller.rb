@@ -67,9 +67,32 @@ class BlogsController < ApplicationController
     redirect_to blogs_path
   end
 
+  before_action :authenticate_user!, only: [:pay, :payment]
+
   def show
     # @blog уже установлен через set_blog
+    if @blog.paid?
+      if user_signed_in? && (current_user == @blog.user || current_user.admin? || current_user.accessible_blogs.exists?(@blog.id))
+        # доступ есть
+      else
+        @access_denied = true
+        return
+      end
+    end
     @blog.update_column(:views, @blog.views + 1)
+  end
+
+  def payment
+    @blog = Blog.find(params[:id])
+  end
+
+  def pay
+    @blog = Blog.find(params[:id])
+    # Имитация успешной оплаты: любые данные считаются валидными
+    unless current_user.accessible_blogs.exists?(@blog.id) || current_user == @blog.user || current_user.admin?
+      current_user.blog_accesses.create!(blog: @blog)
+    end
+    redirect_to blog_path(@blog), notice: 'Доступ до поста оплачено!'
   end
 
   private
@@ -84,6 +107,6 @@ class BlogsController < ApplicationController
     end
 
     def blog_params
-      params.require(:blog).permit(:title, :body, :category)
+      params.require(:blog).permit(:title, :body, :category, :paid)
     end
 end

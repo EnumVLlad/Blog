@@ -3,6 +3,8 @@ class Blog < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :blog_accesses, dependent: :destroy
+  has_many :accessors, through: :blog_accesses, source: :user
   belongs_to :user
 
   validates :category, inclusion: { in: CATEGORY_OPTIONS }

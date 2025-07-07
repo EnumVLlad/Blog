@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'blogs/index'
   devise_for :users
   root to: 'home#index'
   resources :blogs, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    get 'payment', on: :member
+    post 'pay', on: :member
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:create]
   end

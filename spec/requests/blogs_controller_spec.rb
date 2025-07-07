@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Blogs", type: :request do
-  let!(:user) { user }
+  before do
+    allow_any_instance_of(Blog).to receive(:notify_telegram_channel)
+  end
+  let!(:user) { create(:user) }
 
   describe "GET /blogs" do
     it "returns http success" do

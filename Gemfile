@@ -2,6 +2,8 @@ source "https://rubygems.org"
 gem 'figaro'
 
 gem 'devise'
+gem 'pay'
+gem 'stripe'
 
 ruby "3.4.4"
 

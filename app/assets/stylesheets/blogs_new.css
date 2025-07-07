@@ -39,6 +39,66 @@
   margin-top: 0.2em;
 }
 
+/* Кастомный чекбокс для поля 'Платно?' */
+.blog-paid-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 6px;
+}
+.blog-paid-checkbox input[type="checkbox"] {
+  opacity: 0;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  position: absolute;
+  left: 0; top: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+.blog-paid-checkbox .custom-box {
+  position: absolute;
+  left: 0; top: 0;
+  width: 22px;
+  height: 22px;
+  background: #e0e7ef;
+  border: 2px solid #2563eb;
+  border-radius: 5px;
+  transition: background 0.2s;
+  box-sizing: border-box;
+}
+.blog-paid-checkbox input[type="checkbox"]:checked + .custom-box {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+.blog-paid-checkbox .custom-box:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.blog-paid-checkbox input[type="checkbox"]:checked + .custom-box:after {
+  display: block;
+}
+.blog-paid-checkbox .custom-box:after {
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  content: '';
+}
+
+.blog-paid-checkbox-label {
+  margin-left: 4px;
+  font-weight: 500;
+  color: #2563eb;
+  cursor: pointer;
+}
+
 .blog-new-actions {
   text-align: center;
 }

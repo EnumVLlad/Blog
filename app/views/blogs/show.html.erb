@@ -1,16 +1,29 @@
-<h1><%= @blog.title %></h1>
-<p><%= @blog.body %></p>
+<% if @access_denied %>
+  <div class="paid-access-denied" style="text-align: center; margin: 3em 0;">
+    <h2>Цей пост доступний тільки після оплати</h2>
+    <p>Щоб переглянути цей пост, потрібно оплатити доступ.</p>
+    <% if user_signed_in? %>
+      <%= link_to 'Оплатити', payment_blog_path(@blog), class: 'btn btn-primary', style: 'margin: 1.5em 0 0 0;' %>
+    <% else %>
+      <p style="margin: 1.5em 0 0 0;">Увійдіть у акаунт, щоб оплатити доступ.</p>
+    <% end %>
+    <%= link_to 'Повернутись до блогу', blogs_path, class: 'btn btn-secondary', style: 'margin-top: 1.5em;' %>
+  </div>
+<% else %>
+  <h1><%= @blog.title %></h1>
+  <p><%= @blog.body %></p>
 
-<div>
-  <%= render 'likes/like_buttons', blog: @blog %>
-</div>
+  <div>
+    <%= render 'likes/like_buttons', blog: @blog %>
+  </div>
 
-<div>
-  <%= render 'comments/comments', blog: @blog %>
-</div>
+  <div>
+    <%= render 'comments/comments', blog: @blog %>
+  </div>
 
-<% if user_signed_in? && (current_user == @blog.user || current_user.admin?) %>
-  <%= link_to t('buttons.edit'), edit_blog_path(@blog), class: 'btn btn-warning' %>
+  <% if user_signed_in? && (current_user == @blog.user || current_user.admin?) %>
+    <%= link_to t('buttons.edit'), edit_blog_path(@blog), class: 'btn btn-warning' %>
+  <% end %>
+
+  <%= link_to t('buttons.back'), blogs_path, class: 'btn btn-secondary' %>
 <% end %>
-
-<%= link_to t('buttons.back'), blogs_path, class: 'btn btn-secondary' %>

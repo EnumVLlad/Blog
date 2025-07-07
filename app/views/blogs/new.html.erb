@@ -13,9 +13,18 @@
       <%= form.label :body, t('blogs.body_label'), class: 'blog-new-label' %>
       <%= form.text_area :body, required: true, rows: 8, placeholder: t('blogs.body_placeholder'), class: 'blog-new-textarea' %>
     </div>
-    <div class="blog-new-actions">
+    <div class="blog-new-actions" style="display: flex; align-items: center; gap: 1.5em;">
       <%= form.submit t('buttons.save'), class: 'btn blog-new-submit-btn' %>
       <%= link_to t('buttons.cancel'), blogs_path, class: 'btn btn-outline blog-new-cancel-btn' %>
+    </div>
+    <div style="margin-top: 1em; display: flex; justify-content: center; width: 100%;">
+      <label style="display: flex; align-items: center; gap: 0.5em; cursor: pointer;">
+        <span class="blog-paid-checkbox">
+          <%= form.check_box :paid, {}, true, false %>
+          <span class="custom-box"></span>
+        </span>
+        <span class="blog-paid-checkbox-label">Платно?</span>
+      </label>
     </div>
   <% end %>
 </div>
