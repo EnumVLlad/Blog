@@ -3,6 +3,7 @@ gem 'figaro'
 
 gem 'devise'
 gem 'pay'
+gem 'webmock'
 gem 'stripe'
 
 ruby "3.4.4"
