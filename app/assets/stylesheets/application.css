@@ -195,7 +195,6 @@ input[type="submit"]:hover, button[type="submit"]:hover {
   background: var(--accent-hover);
 }
 
-/* Адаптивность */
 @media (max-width: 700px) {
   .card, form {
     padding: 1em;

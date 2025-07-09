@@ -8,10 +8,15 @@ class LikesController < ApplicationController
     if [-1,1].include?(like.value)
       like.save
     end
-    if params[:redirect_to_show]
-      redirect_to blog_path(@blog)
-    else
-      redirect_to blogs_path(anchor: "blog-#{@blog.id}")
+    respond_to do |format|
+      format.js
+      format.html do
+        if params[:redirect_to_show]
+          redirect_to blog_path(@blog)
+        else
+          redirect_to blogs_path(anchor: "blog-#{@blog.id}")
+        end
+      end
     end
   end
 

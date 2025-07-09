@@ -1,12 +1,12 @@
 <div class="like-buttons-block">
-  <%= form_with url: blog_likes_path(blog), method: :post, local: true, html: { class: 'like-form' } do %>
+  <%= form_with url: blog_likes_path(blog), method: :post, remote: true, html: { class: 'like-form', id: "like-form-#{blog.id}-like" } do %>
     <%= hidden_field_tag :value, 1 %>
     <% if controller.controller_name == 'blogs' && controller.action_name == 'show' %>
       <%= hidden_field_tag :redirect_to_show, true %>
     <% end %>
     <button type="submit" class="like-btn">👍 <%= t('buttons.like') %> (<%= blog.likes.where(value: 1).count %>)</button>
   <% end %>
-  <%= form_with url: blog_likes_path(blog), method: :post, local: true, html: { class: 'like-form' } do %>
+  <%= form_with url: blog_likes_path(blog), method: :post, remote: true, html: { class: 'like-form', id: "like-form-#{blog.id}-dislike" } do %>
     <%= hidden_field_tag :value, -1 %>
     <% if controller.controller_name == 'blogs' && controller.action_name == 'show' %>
       <%= hidden_field_tag :redirect_to_show, true %>

@@ -39,7 +39,6 @@
   margin-top: 0.2em;
 }
 
-/* Кастомный чекбокс для поля 'Платно?' */
 .blog-paid-checkbox {
   position: relative;
   display: inline-block;

@@ -70,10 +70,8 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!, only: [:pay, :payment]
 
   def show
-    # @blog уже установлен через set_blog
     if @blog.paid?
       if user_signed_in? && (current_user == @blog.user || current_user.admin? || current_user.accessible_blogs.exists?(@blog.id))
-        # доступ есть
       else
         @access_denied = true
         return
@@ -88,7 +86,6 @@ class BlogsController < ApplicationController
 
   def pay
     @blog = Blog.find(params[:id])
-    # Имитация успешной оплаты: любые данные считаются валидными
     unless current_user.accessible_blogs.exists?(@blog.id) || current_user == @blog.user || current_user.admin?
       current_user.blog_accesses.create!(blog: @blog)
     end

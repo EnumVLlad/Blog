@@ -112,7 +112,6 @@
   margin-bottom: 2em;
 }
 
-/* Компактный tooltip для поисковой строки */
 .tooltip, .search-tooltip {
   font-size: 0.65em !important;
   padding: 0.25em 0.5em !important;

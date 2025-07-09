@@ -45,7 +45,6 @@ RSpec.describe 'Pay/Stripe integration', type: :model do
       body: '{"id": "generic_id", "object": "generic"}',
       headers: { 'Content-Type' => 'application/json' }
     )
-    # RSpec-мок для Stripe::Subscription.create
     allow(Stripe::Subscription).to receive(:create).and_return(
       UniversalMock.new(
         id: "sub_test123",

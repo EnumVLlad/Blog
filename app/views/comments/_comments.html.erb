@@ -15,7 +15,7 @@
     </div>
   <% end %>
   <% if user_signed_in? %>
-    <%= form_with model: [blog, Comment.new], local: true do |f| %>
+    <%= form_with model: [blog, Comment.new], remote: true, html: { id: 'new_comment_form' } do |f| %>
       <% if controller.controller_name == 'blogs' && controller.action_name == 'show' %>
         <%= hidden_field_tag :redirect_to_show, true %>
       <% end %>

@@ -33,11 +33,9 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
-  # Отключаем after_create-коллбек для Blog во всех тестах
   config.before(:each) do
     allow_any_instance_of(Blog).to receive(:notify_telegram_channel)
   end
-  # Для request-спеков с Devise:
   config.include Devise::Test::IntegrationHelpers, type: :request
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

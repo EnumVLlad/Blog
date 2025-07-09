@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :blog do
     sequence(:title) { |n| "Test Blog #{n}" }
     body { "Test body" }
-    category { "travel" } # valid default category
+    category { "travel" }
     association :user
   end
 end
