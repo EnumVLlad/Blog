@@ -19,14 +19,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @blog.comments.find(params[:id])
     respond_to do |format|
-      if @comment.user == current_user || current_user.admin?
-        @comment.destroy
-        format.js
-        format.html { redirect_with_notice('Коментар видалено.') }
-      else
-        format.js
-        format.html { redirect_with_alert('Ви не маєте прав для видалення цього коментаря.') }
-      end
+      @comment.destroy
+      format.js
+      format.html { redirect_with_notice('Коментар видалено.') }
     end
   end
 
