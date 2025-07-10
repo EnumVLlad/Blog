@@ -45,7 +45,11 @@ class BlogsController < ApplicationController
 
   def show
     if @blog.paid?
+      paid_posts = session[:paid_posts] || []
       if user_signed_in? && (current_user == @blog.user || current_user.admin? || current_user.accessible_blogs.exists?(@blog.id))
+        # доступ разрешён
+      elsif paid_posts.include?(@blog.id)
+        # доступ разрешён после оплаты через сессию
       else
         @access_denied = true
         return

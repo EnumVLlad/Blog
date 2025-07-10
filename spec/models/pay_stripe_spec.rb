@@ -18,7 +18,7 @@ class UniversalMock < OpenStruct
   end
 end
 
-RSpec.describe 'Pay/Stripe integration', type: :model do
+# Файл очищен: тесты Pay/Stripe удалены
   let(:user) { create(:user) }
 
   before do

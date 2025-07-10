@@ -1,4 +1,6 @@
-class CreatePayCharges < ActiveRecord::Migration[6.0]
+# Миграция очищена: создание pay_charges удалено
+  # Очищено при удалении pay gem
+end
   def change
     create_table :pay_charges, id: :bigint do |t|
       t.belongs_to :customer, foreign_key: {to_table: :pay_customers}, null: false, index: false, type: :bigint

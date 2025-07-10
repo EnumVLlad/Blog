@@ -172,7 +172,6 @@ GEM
     nokogiri (1.18.8-x86_64-linux-gnu)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pay (11.1.1)
       rails (>= 7.0.0)
     pg (1.5.9)
     pp (0.6.2)
@@ -315,7 +314,6 @@ DEPENDENCIES
   figaro
   importmap-rails
   jbuilder
-  pay
   pg (~> 1.5)
   puma (>= 5.0)
   pundit

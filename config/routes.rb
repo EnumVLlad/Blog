@@ -2,12 +2,19 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
   resources :blogs, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    get 'payment', on: :member
-    post 'pay', on: :member
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:create]
   end
   get 'users', to: 'users#index'
+
+  # Stripe backend payments
+  resources :payments, only: [:new, :create] do
+    collection do
+      post :create_payment_intent
+      get :complete
+    end
+  end
+
   # Описуйте маршрути вашого застосунку відповідно до DSL: https://guides.rubyonrails.org/routing.html
 
   # Перевірка стану на /up: повертає 200, якщо застосунок стартує без помилок, інакше 500.

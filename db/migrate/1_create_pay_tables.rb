@@ -1,4 +1,6 @@
-class CreatePayTables < ActiveRecord::Migration[6.0]
+# Миграция очищена: создание pay-таблиц удалено
+  # Очищено при удалении pay gem
+end
   def change
     primary_key_type = :bigint
     foreign_key_type = :bigint

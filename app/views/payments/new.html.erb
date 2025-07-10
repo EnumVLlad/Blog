@@ -1,0 +1,14 @@
+<h2><%= t('.title') %></h2>
+<link rel="stylesheet" href="/assets/payments.css">
+<script src="https://js.stripe.com/v3/"></script>
+<div id="stripe-payment-form-container">
+  <form id="payment-form">
+    <div id="payment-element"><!--Stripe.js injects the Payment Element--></div>
+    <button id="submit" type="submit">
+      <div class="spinner hidden" id="spinner"></div>
+      <span id="button-text"><%= t('.pay_button') %></span>
+    </button>
+    <div id="payment-message" class="hidden"></div>
+  </form>
+</div>
+<script src="/assets/payments.js"></script>

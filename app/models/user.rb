@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  pay_customer
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :blog_accesses, dependent: :destroy

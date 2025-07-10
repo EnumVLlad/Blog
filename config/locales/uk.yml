@@ -1,4 +1,11 @@
 uk:
+  payments:
+    new:
+      title: "Оплата"
+      email: "Електронна пошта"
+      card: "Картка"
+      card_placeholder: "0000 0000 0000 0000"
+      pay_button: "Оплатити"
   pay:
     requires_action:
       card: "Номер картки"

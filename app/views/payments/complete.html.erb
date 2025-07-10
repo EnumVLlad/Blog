@@ -1,0 +1,11 @@
+<h2><%= t('.title') %></h2>
+<div id="payment-status">
+  <div id="status-icon"></div>
+  <div id="status-text"></div>
+  <table id="details-table">
+    <tr><td class="TableLabel">Intent ID:</td><td class="TableContent" id="intent-id"></td></tr>
+    <tr><td class="TableLabel">Status:</td><td class="TableContent" id="intent-status"></td></tr>
+  </table>
+  <a id="view-details" href="#" target="_blank">View in Stripe Dashboard</a>
+</div>
+<script src="/assets/complete.js"></script>

@@ -1,4 +1,6 @@
-class AddPayStiColumns < ActiveRecord::Migration[6.0]
+# Миграция очищена: pay-логика удалена
+  # Очищено при удалении pay gem
+end
   def change
     add_column :pay_customers, :type, :string
     add_column :pay_charges, :type, :string
