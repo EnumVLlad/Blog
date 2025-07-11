@@ -18,7 +18,13 @@ if (!window.__PAYMENTS_JS_LOADED__) {
 
   let elements;
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function onReady(fn) {
+    document.addEventListener('DOMContentLoaded', fn);
+    document.addEventListener('turbolinks:load', fn);
+    document.addEventListener('turbo:load', fn);
+  }
+
+  onReady(() => {
     initialize();
     document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
   });
@@ -44,7 +50,16 @@ if (!window.__PAYMENTS_JS_LOADED__) {
       elements = stripe.elements({ appearance, clientSecret: data.clientSecret });
       const paymentElementOptions = { layout: "accordion" };
       const paymentElement = elements.create("payment", paymentElementOptions);
+      const paymentElementDiv = document.getElementById('payment-element');
+      if (!paymentElementDiv) {
+        console.error('Stripe: #payment-element not found in DOM!');
+        showMessage('Ошибка: контейнер оплаты не найден.');
+        return;
+      }
+      // Очищаем контейнер перед повторным mount
+      paymentElementDiv.innerHTML = '';
       paymentElement.mount("#payment-element");
+      console.log('Stripe: paymentElement mounted');
     } catch (err) {
       showMessage('Ошибка инициализации Stripe: ' + err.message);
     }
@@ -61,7 +76,7 @@ if (!window.__PAYMENTS_JS_LOADED__) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.location.origin + "/payments/complete",
+        return_url: window.location.origin + "/payments/complete?blog_id=" + document.getElementById('blog-id').value,
       },
     });
     if (error?.type === "card_error" || error?.type === "validation_error") {

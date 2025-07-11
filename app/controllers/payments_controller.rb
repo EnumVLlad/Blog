@@ -18,13 +18,28 @@ class PaymentsController < ApplicationController
   end
 
   def complete
+    Rails.logger.info "[PAYMENTS#COMPLETE] user_signed_in?=#{user_signed_in?}, current_user_id=#{current_user&.id}, blog_id=#{params[:blog_id].inspect}, params=#{params.inspect}"
+    if params[:blog_id].present? && user_signed_in?
+      blog = Blog.find_by(id: params[:blog_id])
+      Rails.logger.info "[PAYMENTS#COMPLETE] blog found: #{blog.present?}, already_accessible=#{blog && current_user.accessible_blogs.exists?(blog.id)}"
+      if blog && !current_user.accessible_blogs.exists?(blog.id)
+        current_user.blog_accesses.create!(blog: blog)
+        Rails.logger.info "[PAYMENTS#COMPLETE] access granted"
+      end
+      redirect_to blog_path(params[:blog_id]), notice: 'Оплата успішна!'
+    else
+      Rails.logger.info "[PAYMENTS#COMPLETE] rendering :complete (not logged in or no blog_id)"
+      render :complete
+    end
   end
 
   def create
-    if params[:blog_id].present?
-      session[:paid_posts] ||= []
-      session[:paid_posts] << params[:blog_id].to_i unless session[:paid_posts].include?(params[:blog_id].to_i)
-    end
+  if params[:blog_id].present?
+    session[:paid_posts] ||= []
+    session[:paid_posts] << params[:blog_id].to_i unless session[:paid_posts].include?(params[:blog_id].to_i)
+    redirect_to blog_path(params[:blog_id]), notice: 'Оплата успішна!'
+  else
     redirect_to(params[:return_url].presence || blogs_path, notice: 'Оплата успішна!')
   end
+end
 end
