@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'active_admin', media: 'all' %>
+    <%= javascript_include_tag 'active_admin' %>
+  </head>
+  <body class="active_admin_dashboard">
+    <%= yield %>
+  </body>
+</html>
