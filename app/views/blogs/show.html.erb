@@ -2,7 +2,7 @@
   <div class="paid-access-denied" style="text-align: center; margin: 3em 0;">
     <h2><%= t('blogs.payment_required') %></h2>
     <% if user_signed_in? %>
-      <%= link_to t('blogs.pay'), payment_blog_path(@blog), class: 'btn btn-primary', style: 'margin: 1.5em 0 0 0;' %>
+      <%= link_to t('blogs.pay'), new_payment_path(return_url: blog_path(@blog), blog_id: @blog.id), class: 'btn btn-primary', style: 'margin: 1.5em 0 0 0;' %>
     <% else %>
       <p style="margin: 1.5em 0 0 0;">Увійдіть у акаунт, щоб оплатити доступ.</p>
     <% end %>

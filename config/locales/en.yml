@@ -1,4 +1,11 @@
 en:
+  payments:
+    new:
+      title: "Payment"
+      email: "Email"
+      card: "Card"
+      card_placeholder: "0000 0000 0000 0000"
+      pay_button: "Pay"
   pay:
     requires_action:
       card: "Card number"

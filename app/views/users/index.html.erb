@@ -6,6 +6,7 @@
         <th style="padding:8px; border:1px solid #ccc;">ID</th>
         <th style="padding:8px; border:1px solid #ccc;">Email</th>
         <th style="padding:8px; border:1px solid #ccc;">Дата реєстрації</th>
+        <th style="padding:8px; border:1px solid #ccc;">Дії</th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +15,22 @@
           <td style="padding:8px; border:1px solid #ccc;"><%= user.id %></td>
           <td style="padding:8px; border:1px solid #ccc;"><%= user.email %></td>
           <td style="padding:8px; border:1px solid #ccc;"><%= user.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+          <td style="padding:8px; border:1px solid #ccc; text-align:center;">
+            <% if current_user&.admin? %>
+  <%= link_to 'Редагувати профіль', edit_user_path(user), class: 'user-action-btn' %>
+<% else %>
+  <button class="user-action-btn" disabled>Редагувати профіль</button>
+<% end %>
+            <% if current_user&.admin? %>
+  <%= form_with url: update_role_user_path(user), method: :patch, local: true, html: { class: 'user-action-form' } do |f| %>
+  <%= f.select :role, options_for_select([['Користувач', 'user'], ['Адмін', 'admin']], user.role), {}, class: 'user-action-btn' %>
+  <%= f.submit 'Зберегти', class: 'user-action-btn' %>
+<% end %>
+<% else %>
+  <button class="user-action-btn" disabled>Права доступу</button>
+<% end %>
+            <%= link_to 'Видалити', user_path(user), method: :delete, data: { confirm: 'Ви впевнені?' }, class: 'user-action-btn user-action-btn--danger' %>
+          </td>
         </tr>
       <% end %>
     </tbody>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <meta name="stripe-publishable-key" content="pk_test_51RjIFNC6hwAGrXHAZQROEme6ZoIuomwladDkfJdp9XEpruisUGdGfLxoszHj4ZDiBkPd0oa0UPlmyVrnjWbZMzu9002AJ88YRY">
+
     <title>BlogNew</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -12,9 +14,14 @@
 
   <body>
     <header class="layout-header">
-      <div class="layout-home-icon">
+      <div class="layout-home-icon" style="display: flex; align-items: center;">
         <%= link_to root_path, class: 'layout-home-link' do %>
           <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="<%= t('layout.home_alt') %>" class="layout-header-img" />
+        <% end %>
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to admin_root_path, class: 'layout-admin-link', style: 'margin-left: 16px;' do %>
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828986.png" alt="Admin" title="Админ-панель" style="width:28px; height:28px; filter: brightness(0) invert(1); vertical-align:middle;" />
+          <% end %>
         <% end %>
       </div>
       <div class="layout-user-info">

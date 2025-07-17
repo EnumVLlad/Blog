@@ -1,5 +1,20 @@
 class ApplicationController < ActionController::Base
   include Pundit
+
+  # For ActiveAdmin authentication
+  def authenticate_admin_user!
+    authenticate_user!
+    unless current_user&.admin?
+      redirect_to root_path, alert: "Not authorized"
+    end
+  end
+
+  # For ActiveAdmin compatibility
+  def current_admin_user
+    current_user
+  end
+  helper_method :current_admin_user
+
   before_action :set_locale
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
@@ -22,4 +37,10 @@ class ApplicationController < ActionController::Base
   def render_not_found
     render file: Rails.root.join('public', '404.html'), status: :not_found, layout: false
   end
+
+  # Alias for ActiveAdmin compatibility
+  def current_admin_user
+    current_user
+  end
+  helper_method :current_admin_user
 end

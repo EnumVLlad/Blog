@@ -1,0 +1,22 @@
+<div class="admin-users-list-main">
+  <h1 class="admin-users-list-header">Список користувачів</h1>
+  <table class="admin-users-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Дата реєстрації</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td><%= user.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

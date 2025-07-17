@@ -1,0 +1,100 @@
+/*
+ *= require active_admin
+ *= require application
+ *= require layouts_application
+ *= require blogs_index
+ *= require blogs_new
+ *= require blogs_show
+ *= require comments_comments
+ *= require home_index
+ *= require likes_like_buttons
+ *= require payment_animation
+ *= require payments
+ *= require users_index
+ *= require admin_users_index
+ */
+
+body.active_admin_dashboard #header,
+body.active_admin_dashboard #tabs,
+body.active_admin_dashboard #utility_nav,
+body.active_admin_dashboard #footer {
+  display: none !important;
+}
+
+body {
+  background: #f5f7fa !important;
+}
+
+
+.admin-btn {
+  width: 100%;
+  min-width: 120px;
+  max-width: 270px;
+  padding: 0.7em 0;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary-btn-bg, #1976d2);
+  color: var(--primary-btn-text, #fff);
+  font-size: 1.08em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+  margin: 0 auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+.admin-btn--back {
+  margin-top: 0.8em;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 270px;
+}
+
+
+.admin-case {
+  width: 350px;
+  margin: 3em auto 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 18px rgba(30,60,90,0.11);
+  padding: 2em 1.5em 1.5em 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.admin-case__menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  margin-bottom: 1em;
+}
+
+.admin-case__admins {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+.admin-case__admins-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-bottom: 0.7em;
+  color: var(--main-text, #222);
+}
+
+.admin-case__admins-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2em 0;
+}
+
+.admin-case__admins-list li {
+  font-size: 1em;
+  color: #1976d2;
+  margin-bottom: 0.4em;
+}
+

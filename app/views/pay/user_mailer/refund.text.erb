@@ -1,11 +1,3 @@
-We have processed your <%= Pay.application_name %> refund.
-Please allow up to 7 business days for your refund to appear in your account
-
-Questions? Please reply to this email.
-
-------------------------------------
-RECEIPT - REFUND
-
 <%= Pay.application_name %>
 Amount: <%= params[:pay_charge].amount_refunded_with_currency %>
 
@@ -18,4 +10,3 @@ Date: <%= l params[:pay_charge].created_at %>
 
 <%= Pay.business_name %>
 <%= Pay.business_address %>
-------------------------------------

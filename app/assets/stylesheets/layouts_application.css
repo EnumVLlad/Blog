@@ -82,7 +82,7 @@
 
 .layout-footer {
   width: 100%;
-  background: var(--main-bg);
+  background: #f5f7fa;
   color: var(--main-text);
   display: flex;
   justify-content: center;
