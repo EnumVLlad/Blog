@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
   before_action :authorize_blog!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:pay, :payment]
 
   def index
     @blogs = BlogsQuery.new(Blog.all, params).call
@@ -41,21 +42,23 @@ class BlogsController < ApplicationController
     redirect_to blogs_path
   end
 
-  before_action :authenticate_user!, only: [:pay, :payment]
-
   def show
     if @blog.paid?
       paid_posts = session[:paid_posts] || []
+      allowed = false
+
       if user_signed_in? && (current_user == @blog.user || current_user.admin? || current_user.accessible_blogs.exists?(@blog.id))
-        # доступ разрешён
+        allowed = true
       elsif paid_posts.include?(@blog.id)
-        # доступ разрешён после оплаты через сессию
-      else
+        allowed = true
+      end
+
+      unless allowed
         @access_denied = true
-        return
+        render 'access_denied' and return
       end
     end
-    @blog.update_column(:views, @blog.views + 1)
+    @blog.increment!(:views)
   end
 
   def payment
